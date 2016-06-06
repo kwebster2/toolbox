@@ -13,8 +13,10 @@ Subject.create(name: "Authentication", category_id: 1)
 Subject.create(name: "Objects", category_id: 2)
 Subject.create(name: "Animations", category_id: 3)
 
-Resource.create(name: "Remote Authentication", url: "https://medium.com/@kevin.r.webster/third-party-authentication-bb6aca7fee0c#.z60ktcm9b", subject_id: 1)
+r = Resource.create(name: "Remote Authentication", url: "https://medium.com/@kevin.r.webster/third-party-authentication-bb6aca7fee0c#.z60ktcm9b", subject_id: 1)
 Resource.create(name: "Sick Blog", url: "https://google.com", subject_id: 3)
+
+r.tags << Tag.create(name: "Rails")
 
 Cohort.create(name: "Web Development")
 Cohort.create(name: "iOS")
