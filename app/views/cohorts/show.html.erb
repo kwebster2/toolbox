@@ -1,5 +1,5 @@
 <div>
-  
+
   <div>
     <h1><%= @cohort.name %></h1>
   </div>
@@ -12,5 +12,7 @@
       <% end %>
     </ul>
   </div>
+
+  <%= link_to "Add Category", new_cohort_category_path(@cohort.slug) %>
 
 </div>

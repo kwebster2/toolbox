@@ -13,4 +13,5 @@ class CohortsController < ApplicationController
   def set_cohort
     @cohort = Cohort.find_by(slug: params[:slug])
   end
+
 end
