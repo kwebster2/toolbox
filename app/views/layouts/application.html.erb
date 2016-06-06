@@ -7,11 +7,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<%= render 'layouts/navbar' %>
 
 <%= yield %>
-<br>
-<div>
-  <%= link_to "Logout", logout_path, method: 'post' %>
-</div>
+
 </body>
 </html>
