@@ -18,6 +18,8 @@ gem 'omniauth-github'
 group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
+  gem 'capybara'
+  gem 'database_cleaner'
 end
 
 group :development do
