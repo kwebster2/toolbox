@@ -1,18 +1,40 @@
-<div>
+<div class="container-fluid">
 
-  <div>
-    <h1><%= @category.cohort.name %> - <%= @category.name %></h1>
+  <div class="page-header">
+    <div class="pull-right">
+      <%= button_to "+Add Subject", new_cohort_category_subject_path(@category.cohort.slug, @category.slug), class: "btn btn-success", method: 'get' %>
+    </div>
+    <h2>Select a subject</h2> 
   </div>
 
   <div>
-    <h2>Select a subject</h2>
-    <ul>
+    <!-- <div class="well">
+      <div class="btn btn-group-sml" role="group" aria-label="...">
       <% @category.subjects.each do |s| %>
-      <li><%= link_to s.name, cohort_category_subject_path(@category.cohort.slug, @category.slug, s.slug) %></li>
+          <%= link_to s.name, cohort_category_subject_path(@category.cohort.slug, @category.slug, s.slug), class: "btn btn-default" %>
       <% end %>
-    </ul>
-  </div>
-
-  <%= link_to "Add Subject", new_cohort_category_subject_path(@category.cohort.slug, @category.slug) %>
-
+      </div>
+    </div> -->
+    <% @category.subjects.each do |s| %>
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="list-group-item active">
+          <h1 class="panel-title block-title"><%= link_to s.name, cohort_category_subject_path(@category.cohort.slug, @category.slug, s.slug) %></h1>
+        </div>
+        <div class="panel-body">
+          <% s.resources.limit(3).each do |r| %>
+          <a href="<% link_to %>" class="list-group-item">
+            <span class="badge">[save]</span>
+            <h4 class="list-group-item-heading"><%= r.name %></h4>
+            <p class="list-group-item-text"><%= r.short_description %></p>
+          </a>
+        <% end %>
+        </div>
+        <div class="more-link">
+          <%= link_to "More", cohort_category_subject_path(@category.cohort.slug, @category.slug, s.slug) %>
+        </div>
+      </div>
+    </div>
+      <% end %>
+  </div>  
 </div>

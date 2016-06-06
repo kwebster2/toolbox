@@ -1,21 +1,25 @@
-<div>
-  <div>
-    <h1><%= @subject.category.cohort.name %> - <%= @subject.category.name %></h1>
+<div class="container-fluid">
+  <div class="page-header">
+    <div class="pull-right">
+      <%= button_to "+Add Resource", new_resource_path(subject_id: @subject.id), class: "btn btn-success", method: 'get' %>
+    </div>
+    <h2><%= @subject.name %> Resources:</h2> 
   </div>
 
   <div>
-    <h2><%= @subject.name %></h2>
-  </div>
-
-  <div>
-    <h3>Resources:</h3>
-    <ul>
       <% @subject.resources.each do |r| %>
-      <li><%= link_to r.description, r.url %></li>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="list-group-item active">
+            <h1 class="panel-title block-title">
+              <%= link_to r.name, r.url %>
+            </h1>
+          </div>
+          <div class="panel-body">
+            <%= r.description %>
+          </div>    
+        </div>
+      </div>
       <% end %>
-    </ul>
   </div>
-
-  <%= link_to "Add Resource", new_resource_path(subject_id: @subject.id) %>
-
 </div>

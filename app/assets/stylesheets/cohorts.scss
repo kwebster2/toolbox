@@ -1,3 +1,42 @@
 // Place all the styles related to the Cohorts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#ios-graphic{
+  background-image: url('/assets/ios-development.jpg');
+}
+
+#web-graphic{
+  background-image: url('/assets/web-development.jpg');
+}
+
+.cohort-banner{
+  height: 500px;
+  background-repeat: no-repeat; 
+  background-position: center;
+  opacity: 0.5;
+}
+
+.cohort-text{
+  font-color: white;
+  z-index: 1;
+}
+
+.block-title{
+  font-size: 1.6em;
+}
+
+.recent-title{
+  line-height: 0.25em;
+  color: grey;
+  text-align: center;
+}
+
+.more-link{
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+.key-button{
+
+}
