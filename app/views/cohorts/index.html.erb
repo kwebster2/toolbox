@@ -1,5 +1,6 @@
-<div class="container-fluid">
-  
+<%= render 'layouts/navbar' %>
+
+<div class="container-fluid">  
   <div class="page-header">
     <h2>Select your cohort</h2> 
   </div>
@@ -18,7 +19,7 @@
   <div class="col-md-6">
     <div class="panel panel-default">
       <div class="list-group-item active">
-        <div class="panel-title block-title"><%= link_to "iOS", cohort_path(slug: @cohorts.last.slug) %></div>
+        <h1 class="panel-title block-title"><%= link_to "iOS", cohort_path(slug: @cohorts.last.slug) %></h1>
       </div>    
       <div class="panel-body cohort-banner" id="ios-graphic">
         <div class="cohort-text">iOS Development Immersive Cohorts</div>
