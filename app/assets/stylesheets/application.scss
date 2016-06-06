@@ -1,3 +1,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "cohorts";
+
+.navbar-avatar{
+  border-radius:50%;
+  width:30px;
+  margin-right:5px;
+}
+
