@@ -9,7 +9,7 @@
   <div class="col-md-8" id="newsfeed">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title"><%= @cohort.name %> | Recent Additions:</h3>
+        <h3 class="panel-title">Recent Additions:</h3>
       </div>    
       <div class="panel-body">
       <% @cohort.resources.order(created_at: :desc).limit(10).each do |r| %>
@@ -46,14 +46,14 @@
       <div class="panel-body">
         <div class="list-group">
         <% @cohort.categories.each do |c| %>
-          <div class="list-group-item">
-          <span class="badge"><%= c.subjects.length %></span>
+          <%= link_to cohort_category_path(@cohort.slug, c.slug), class: "list-group-item" do %> 
+            <span class="badge"><%= c.subjects.length %></span>
             <%= c.name %>
-          </div>
+          <% end %>
         <% end %>
         </div>
         <div class="pull-right">
-        <%= button_to "+Add Category", new_cohort_category_path(@cohort.slug), class: "btn btn-success", method: 'get' %>
+        <%= button_to "+Add Category", new_cohort_category_path(@cohort.slug), class: "btn btn-info", method: 'get' %>
         </div>
       </div>
     </div>
