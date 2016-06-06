@@ -1,15 +1,29 @@
-<div>
-
-  <div>
-    <h1>Select your Cohort:</h1>
+<div class="container-fluid">
+  
+  <div class="page-header">
+    <h2>Select your cohort</h2> 
+  </div>
+  
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="list-group-item active">
+        <h1 class="panel-title block-title"><%= link_to "Web", cohort_path(slug: @cohorts.first.slug) %></h1>
+      </div>
+      <div class="panel-body cohort-banner" id="web-graphic">
+        <div class="cohort-text">Web Development Immersive Cohorts</div>
+      </div>    
+    </div>
   </div>
 
-  <div>
-    <% @cohorts.each do |c| %>
-    <ul>
-      <li><%= link_to c.name, cohort_path(slug: c.slug) %></li>
-    </ul>
-    <% end %>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="list-group-item active">
+        <div class="panel-title block-title"><%= link_to "iOS", cohort_path(slug: @cohorts.last.slug) %></div>
+      </div>    
+      <div class="panel-body cohort-banner" id="ios-graphic">
+        <div class="cohort-text">iOS Development Immersive Cohorts</div>
+      </div>    
+    </div>    
   </div>
 
 </div>
