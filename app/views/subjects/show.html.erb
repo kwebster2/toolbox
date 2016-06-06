@@ -1,0 +1,19 @@
+<div>
+  <div>
+    <h1><%= @subject.category.cohort.name %> - <%= @subject.category.name %></h1>
+  </div>
+
+  <div>
+    <h2><%= @subject.name %></h2>
+  </div>
+
+  <div>
+    <h3>Resources:</h3>
+    <ul>
+      <% @subject.resources.each do |r| %>
+      <li><%= link_to r.description, r.url %></li>
+      <% end %>
+    </ul>
+  </div>
+
+</div>

@@ -1,0 +1,16 @@
+<div>
+  
+  <div>
+    <h1><%= @cohort.name %></h1>
+  </div>
+
+  <div>
+    <h2>Select a category</h2>
+    <ul>
+      <% @cohort.categories.each do |c| %>
+      <li><%= link_to c.name, cohort_category_path(@cohort.slug, c.slug) %></li>
+      <% end %>
+    </ul>
+  </div>
+
+</div>

@@ -1,9 +1,11 @@
 class Category < ActiveRecord::Base
-  belongs_to :category
+  belongs_to :cohort
   has_many :subjects
   has_many :resources, through: :subjects
   has_many :tags,  through: :resources
   include Slugify
+
+  before_create :to_slug
 
 
 end
