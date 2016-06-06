@@ -1,0 +1,18 @@
+<div>
+
+  <div>
+    <h1><%= @category.cohort.name %> - <%= @category.name %></h1>
+  </div>
+
+  <div>
+    <h2>Select a subject</h2>
+    <ul>
+      <% @category.subjects.each do |s| %>
+      <li><%= link_to s.name, cohort_category_subject_path(@category.cohort.slug, @category.slug, s.slug) %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <%= link_to "Add Subject", new_cohort_category_subject_path(@category.cohort.slug, @category.slug) %>
+
+</div>

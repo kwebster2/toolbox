@@ -3,4 +3,6 @@ class Cohort < ActiveRecord::Base
   has_many :categories
   include Slugify
 
+  before_create :to_slug
+
 end

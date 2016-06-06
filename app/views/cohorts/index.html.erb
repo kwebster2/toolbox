@@ -1,0 +1,15 @@
+<div>
+
+  <div>
+    <h1>Select your Cohort:</h1>
+  </div>
+
+  <div>
+    <% @cohorts.each do |c| %>
+    <ul>
+      <li><%= link_to c.name, cohort_path(slug: c.slug) %></li>
+    </ul>
+    <% end %>
+  </div>
+
+</div>

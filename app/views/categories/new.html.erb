@@ -1,0 +1,22 @@
+<div>
+
+  <div>
+    <h1>Create new category</h1>
+  </div>
+
+  <%= form_for @category, url: cohort_categories_path(@category.cohort.slug) do |f| %>
+
+  <%= f.hidden_field :cohort_id %>
+
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div><br>
+
+  <div>
+    <%= f.submit %>
+  </div>
+
+  <% end %>
+
+</div>
