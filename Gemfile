@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 # Default rails
 gem 'rails', '4.2.6'
 gem 'pg', '~> 0.15'
-gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'turbolinks'
@@ -15,6 +14,10 @@ gem 'figaro'
 gem 'omniauth'
 gem 'omniauth-github'
 #gem 'bcrypt', '~> 3.1.7'
+
+#Boostrap
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'sass-rails', '~> 5.0'
 
 group :development, :test do
   gem 'pry-rails'
@@ -29,4 +32,8 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+group :production do
+  gem 'rails_12factor'
 end
