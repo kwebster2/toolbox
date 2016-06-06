@@ -7,7 +7,6 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.create(category_params)
-    binding.pry
     redirect_to cohort_category_path(@category.cohort.slug, @category.slug)
   end
 
