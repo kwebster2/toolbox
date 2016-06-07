@@ -8,12 +8,12 @@ Rails.application.routes.draw do
 
   # Nested Resources
   resources :cohorts, param: :slug do
-    resources :categories, param: :slug 
+    resources :categories, param: :slug
   end
 
   # Shallow Resources
   resources :tags
-  resources :resources, only: [:new]
+  resources :resources, only: [:new, :destroy]
   post 'resources/:id/bookmark', to: 'resources#bookmark', as: :bookmark
   resources :users, param: :user_name
 

@@ -5,41 +5,43 @@
     <h2><%= @user.user_name %></h2>
   </div>
 
-  <div>
-      <% @user.resources.each do |r| %>
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="list-group-item active">
-            <h1 class="panel-title block-title">
-              <%= link_to r.name, r.url %>
-              <span class="bookmark" resource_parent_id="<%=r.id%>" style="display: inline-block">
-                <%= render partial: "resources/resource_bookmarks", locals: {resource: r}%>
-              </span>
-            </h1>
-          </div>
-          <div class="panel-body">
-            <%= r.description %>
-          </div>
+  <div class="col-md-6" id="bookmark_tree">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Saved Resources</h3>
+      </div>
+      <div class="panel-body">
+        <div class="list-group">
+          <% @user.bookmarks.each do |b| %>
+          <li class="list-group-item">
+            <span class="bookmark" resource_parent_id="<%= b.resource.id %>">
+              <%= render partial: "resources/resource_bookmarks", locals: {resource: b.resource } %>
+            </span>
+            <%= link_to b.resource.name, b.resource.url %>
+          </li>
+          <% end %>
         </div>
       </div>
-      <% end %>
+    </div>
   </div>
 
-  <div>
-      <% @user.bookmarks.each do |b| %>
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="list-group-item active">
-            <h1 class="panel-title block-title">
-              <span class="bookmark btn btn-sm pull-right" resource_parent_id="<%= b.resource.id %>">
-                <%= render partial: "resources/resource_bookmarks", locals: { resource: b.resource }%>
-              </span>
-              <%= link_to b.resource.name, b.resource.url %>
-            </h1>
-          </div>
-
+  <div class="col-md-6" id="bookmark_tree">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Posted Resources</h3>
+      </div>
+      <div class="panel-body">
+        <div class="list-group">
+          <% @user.resources.each do |r| %>
+          <li class="list-group-item">
+          <%= link_to r.name, r.url %>
+          <span class="pull-right">
+          <%= button_to "Delete", resource_path(r), method: :delete, class: "btn btn-danger btn-sm" %>
+          </span>
+          </li>
+          <% end %>
         </div>
       </div>
-      <% end %>
+    </div>
   </div>
 </div>

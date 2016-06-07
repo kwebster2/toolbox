@@ -18,6 +18,10 @@ class ResourcesController < ApplicationController
     end
   end
 
+  def destroy
+    binding.pry
+  end
+
   private
   def resource_params
     params.require(:resource).permit(:name, :description, :url, :subject_id)
