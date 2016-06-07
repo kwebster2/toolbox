@@ -1,1 +1,1 @@
-$("div.bookmark[resource_parent_id='<%= @resource.id %>']").html("<%= j render partial: 'resources/resource_bookmarks', locals: {resource: @resource } %>")
+$("span.bookmark[resource_parent_id='<%= @resource.id %>']").html("<%= j render partial: 'resources/resource_bookmarks', locals: {resource: @resource } %>")

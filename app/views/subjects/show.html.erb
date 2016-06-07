@@ -15,9 +15,9 @@
           <div class="list-group-item active">
             <h1 class="panel-title block-title">
               <%= link_to r.name, r.url %>
-              <div class="bookmark" resource_parent_id="<%=r.id%>">
+              <span class="bookmark" resource_parent_id="<%=r.id%>" style="display: inline-block">
                 <%= render partial: "resources/resource_bookmarks", locals: {resource: r}%>
-              </div>
+              </span>
             </h1>
           </div>
           <div class="panel-body">
