@@ -11,5 +11,6 @@ class CohortsController < ApplicationController
   private
   def set_cohort
     @cohort = Cohort.find_by(slug: params[:slug])
+    @resource = Resource.new
   end
 end

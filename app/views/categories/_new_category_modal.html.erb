@@ -1,4 +1,4 @@
-<%= form_for :category do |f| %>
+<%= form_for :category, url: cohort_categories_path(@cohort.to_slug, cohort_id: @cohort.id), method: 'post' do |f| %>
 
 <div class="modal fade" id="categoryModel" tabindex="-1" role="dialog" aria-labelledby="categoryModelLabel">
   <div class="modal-dialog" role="document">
@@ -6,12 +6,7 @@
       
       <div class="modal-header">
         <img src="<%= current_user.avatar_url %>" class="navbar-avatar"><b><%= current_user.user_name %></b>
-        <div class="pull-right">
-          <span>
-            Add a category
-          </span>
-
-        </div>
+        <div class="pull-right"><span><h5><%= @cohort.name %> | New Category</h5></span></div>
       </div>
 
       <div class="modal-body">

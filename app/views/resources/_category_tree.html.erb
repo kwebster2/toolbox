@@ -1,0 +1,22 @@
+<div class="col-md-4" id="category_tree">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= link_to "All categories", cohort_path(@cohort.to_slug) %></h3>
+    </div>    
+    <div class="panel-body">
+      <div class="list-group">
+      <% @cohort.categories.each do |c| %>
+          <% !@category.nil? && c.name == @category.name ? x = 'list-group-item active' : x = 'list-group-item' %>
+        <%= link_to cohort_category_path(@cohort.to_slug, c.to_slug), class: x do %> 
+          <span class="badge"><%= c.resources.length %></span>
+          <%= c.name %>
+        <% end %>
+      <% end %>
+      </div>
+      <div class="pull-right">
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#categoryModel">+Add Category
+      </button>        
+      </div>
+    </div>
+  </div>
+</div>

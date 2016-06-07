@@ -1,0 +1,48 @@
+<div class="col-md-8" id="newsfeed">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Latest Resources</h3>
+    </div>    
+    <div class="panel-body">
+    <% @category.nil? ? source = @cohort : source = @category %>
+    <% source.resources.order(created_at: :desc).offset(0).limit(10).each do |r| %>
+      <div class="media newsfeed-item">
+        <div class="media-left">
+        <% if !r.user.nil? && !r.user.avatar_url.nil? %>
+          <img src="<%= r.user.avatar_url %>" alt="<%= r.user.name %>" class="navbar-avatar">
+        <% else %>
+          <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" alt="" class="navbar-avatar">
+        <% end %>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading"><%= r.name %><small> | <%= r.category.name %></small></h4> 
+          <p><%= r.short_description %></p>              
+        </div>
+        <div class="media-right">
+            <span class="bookmark" resource_parent_id="<%= r.id %>">
+              <%= render partial: "resources/resource_bookmarks", locals: {resource: r}%>
+            </span>
+        </div>
+      </div>
+    <% end %>
+    </div>
+    <div class="panel-footer">
+      <div class="btn-toolbar" role="toolbar" aria-label="...">
+        <div class="btn-group pull-right" role="group" class="btn btn-default">
+            <% i = source.resources.length %>
+            <% j = 0 %>
+            <% a = i/10 %>
+            <% if a < 1 %>
+              <button type="button" class="btn btn-default scroll-feed">1-<%=i%></button>
+            <% else %>
+              <% a.times do %>
+              <button type="button" class="btn btn-default scroll-feed"><%=j+1%>-<%=j+10%></button>    
+              <% j += 10 %>
+              <% end %>
+              <button type="button" class="btn btn-default scroll-feed"><%=j+1%>-<%=i%></button>
+            <% end %>  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

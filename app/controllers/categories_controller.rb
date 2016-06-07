@@ -6,8 +6,16 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.create(category_params)
-    redirect_to cohort_category_path(@category.cohort.slug, @category.slug)
+    category = Category.find_or_create_by(category_params)
+    category.update(cohort_id: params["cohort_id"])
+    category.save
+
+    refer = request.env["HTTP_REFERER"].split("/")
+    if refer.length > 5
+      redirect_to cohort_category_path(refer[refer.length-3], category.slug)
+    else
+      redirect_to cohort_path(category.cohort.slug)
+    end
   end
 
   def show
@@ -17,6 +25,8 @@ class CategoriesController < ApplicationController
 
   def set_category
     @category = Category.find_by(slug: params[:slug])
+    @cohort = @category.cohort
+    @resource = Resource.new
   end
 
   def category_params

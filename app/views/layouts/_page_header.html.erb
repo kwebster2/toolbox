@@ -1,0 +1,9 @@
+<% @category.nil? ? subheader = 'Select a category to browse' : subheader = @category.name %>
+
+<div class="page-header">
+  <div class="pull-right">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#resourceModel">+Post Resource
+    </button>
+  </div>
+  <h2><%= @cohort.name %> <small><%= subheader %></small></h2> 
+</div>
