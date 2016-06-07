@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many   :resources
+  has_many   :bookmarks
   belongs_to :cohort
 
   def self.omniauth_login(githash)

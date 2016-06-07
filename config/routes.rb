@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   root 'home#index'
 
   # Login / Logout
@@ -15,7 +15,8 @@ Rails.application.routes.draw do
 
   # Shallow Resources
   resources :tags
-  resources :resources
+  resources :resources, only: [:new]
+  post 'resources/:id/bookmark', to: 'resources#bookmark', as: :bookmark
   resources :users
 
 end

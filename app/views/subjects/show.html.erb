@@ -5,7 +5,7 @@
     <div class="pull-right">
       <%= button_to "+Add Resource", new_resource_path(subject_id: @subject.id), class: "btn btn-success", method: 'get' %>
     </div>
-    <h2><%= @subject.name %> Resources:</h2> 
+    <h2><%= @subject.name %> Resources:</h2>
   </div>
 
   <div>
@@ -15,11 +15,14 @@
           <div class="list-group-item active">
             <h1 class="panel-title block-title">
               <%= link_to r.name, r.url %>
+              <div class="bookmark" resource_parent_id="<%=r.id%>">
+                <%= render partial: "resources/resource_bookmarks", locals: {resource: r}%>
+              </div>
             </h1>
           </div>
           <div class="panel-body">
             <%= r.description %>
-          </div>    
+          </div>
         </div>
       </div>
       <% end %>
