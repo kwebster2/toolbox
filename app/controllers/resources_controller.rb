@@ -5,6 +5,7 @@ class ResourcesController < ApplicationController
   end
 
   def create
+    binding.pry
     @resource = Resource.create(resource_params)
     @resource.user = current_user
     tags = parse_tags(params["resource"]["tags"])

@@ -16,7 +16,7 @@
         <%= f.text_area :description, placeholder: 'Enter a short description (optional)', class: 'form-control' %>
         <br>
         <%= f.label :category %>
-        <%= f.collection_select :category_id, Category.all, :id, :name, {prompt: true}, {class: 'form-control'} %>
+        <%= f.collection_select :category_id, @cohort.categories.all, :id, :name, {prompt: true}, {class: 'form-control'} %>
         <br>
         <%= f.fields_for :tags do |t| %>
         <%= f.label :tags %>
