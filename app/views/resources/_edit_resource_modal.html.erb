@@ -1,0 +1,32 @@
+<%= form_for resource do |f| %>
+
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <img src="<%= current_user.avatar_url %>" class="navbar-avatar"><b><%= current_user.user_name %></b>
+        <div class="pull-right"><span><h5>Edit Post</h5></span></div>
+      </div>
+
+      <div class="modal-body">
+        <%= f.label :name, "Resource" %>
+        <%= f.text_field :name, placeholder: 'Title (required)', class: 'form-control' %>
+        <%= f.text_field :url, placeholder: 'URL (required)', class: 'form-control' %>
+        <%= f.text_area :description, placeholder: 'Enter a short description (optional)', class: 'form-control' %>
+        <br>
+        <%= f.label :category %>
+        <%= f.collection_select :category_id, Category.all, :id, :name, {prompt: true}, {class: 'form-control'} %>
+        <br>
+        <%= f.fields_for :tags do |t| %>
+        <%= f.label :tags %>
+        <%= t.text_field :tags, placeholder: 'Enter tags separated by commas (eg: gems, rspec)', class: 'form-control' %>
+        <% end %>
+      </div>
+
+      <div class="modal-footer">
+         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         <%= f.submit "Save Resource", class: 'btn btn-info' %>
+      </div>
+      <% end %>
+    </div>
+  </div>

@@ -4,6 +4,10 @@ class ResourcesController < ApplicationController
     @resource = Resource.new(subject_id: params["subject_id"])
   end
 
+  def edit
+    @resource = Resource.find(params[:id])
+  end
+
   def create
     @resource = Resource.create(resource_params)
     @resource.user = current_user

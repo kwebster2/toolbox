@@ -2,46 +2,67 @@
 
 <div class="container-fluid">
   <div class="page-header">
-    <h2><%= @user.user_name %></h2>
+    <h2>User Profile <small><%= @user.name %></small></h2>
   </div>
 
-  <div class="col-md-6" id="bookmark_tree">
+  <div class="col-md-8" id="newsfeed-bookmarks">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Saved Resources</h3>
       </div>
       <div class="panel-body">
-        <div class="list-group">
+        <ul class="list-group">
           <% @user.bookmarks.each do |b| %>
-          <li class="list-group-item">
-            <span class="bookmark" resource_parent_id="<%= b.resource.id %>">
-              <%= render partial: "resources/resource_bookmarks", locals: {resource: b.resource } %>
-            </span>
-            <%= link_to b.resource.name, b.resource.url %>
-          </li>
+            <div class="media newsfeed-item">              
+              <div class="media-left">
+              <% if !b.user.nil? && !b.user.avatar_url.nil? %>
+                <img src="<%= b.user.avatar_url %>" alt="<%= b.user.name %>" class="navbar-avatar">
+              <% else %>
+                <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" alt="" class="navbar-avatar">
+              <% end %>
+              </div>
+
+              <div class="media-body">
+                <h4 class="media-heading"><%= b.resource.name %><small> | <%= b.resource.category.name %></small></h4> 
+                <p><%= b.resource.short_description %></p>              
+              </div>
+
+              <div class="media-right">
+                <span class="bookmark" resource_parent_id="<%= b.id %>">
+                  <%= render partial: "resources/resource_bookmarks", locals: {resource: b.resource}%>
+                </span>
+              </div>
+            </div>
           <% end %>
-        </div>
+        </ul>
       </div>
     </div>
   </div>
 
-  <div class="col-md-6" id="bookmark_tree">
+  <div class="col-md-4" id="user_posts_tree">
     <div class="panel panel-default">
+
       <div class="panel-heading">
-        <h3 class="panel-title">Posted Resources</h3>
+        <h3 class="panel-title">Your posts</h3>
       </div>
+
       <div class="panel-body">
         <div class="list-group">
           <% @user.resources.each do |r| %>
-          <li class="list-group-item">
-          <%= link_to r.name, r.url %>
-          <span class="pull-right">
-          <%= button_to "Delete", resource_path(r), method: :delete, class: "btn btn-danger btn-sm" %>
-          </span>
-          </li>
+          
+          <div class="list-group-item">
+            <span class="pull-right"><%= link_to "Edit", '#', data: {toggle: "modal", target: "#resourceModel_#{r.id}"} %> | <%= link_to "Delete", resource_path(r), method: :delete %></span>
+            <h5><%= r.name %></h5>
+            <p><%= r.short_description %></p>
+          </div>
+            <div class="modal fade" id="resourceModel_<%=r.id%>" tabindex="-1" role="dialog" aria-labelledby="resourceModelLabel">
+              <%= render 'resources/edit_resource_modal', resource: r %>
+            </div>
           <% end %>
         </div>
       </div>
+
     </div>
   </div>
 </div>
+
