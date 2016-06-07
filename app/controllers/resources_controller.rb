@@ -19,7 +19,10 @@ class ResourcesController < ApplicationController
   end
 
   def destroy
-    binding.pry
+    resource = Resource.find(params[:id])
+    user = resource.user
+    resource.destroy
+    redirect_to user_path(user.user_name)
   end
 
   private
