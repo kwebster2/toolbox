@@ -1,0 +1,45 @@
+<%= render 'layouts/navbar' %>
+
+<div class="container-fluid">
+  <div class="page-header">
+    <h2><%= @user.user_name %></h2>
+  </div>
+
+  <div>
+      <% @user.resources.each do |r| %>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="list-group-item active">
+            <h1 class="panel-title block-title">
+              <%= link_to r.name, r.url %>
+              <span class="bookmark" resource_parent_id="<%=r.id%>" style="display: inline-block">
+                <%= render partial: "resources/resource_bookmarks", locals: {resource: r}%>
+              </span>
+            </h1>
+          </div>
+          <div class="panel-body">
+            <%= r.description %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+  </div>
+
+  <div>
+      <% @user.bookmarks.each do |b| %>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="list-group-item active">
+            <h1 class="panel-title block-title">
+              <span class="bookmark btn btn-sm pull-right" resource_parent_id="<%= b.resource.id %>">
+                <%= render partial: "resources/resource_bookmarks", locals: { resource: b.resource }%>
+              </span>
+              <%= link_to b.resource.name, b.resource.url %>
+            </h1>
+          </div>
+
+        </div>
+      </div>
+      <% end %>
+  </div>
+</div>

@@ -17,6 +17,6 @@ Rails.application.routes.draw do
   resources :tags
   resources :resources, only: [:new]
   post 'resources/:id/bookmark', to: 'resources#bookmark', as: :bookmark
-  resources :users
+  resources :users, param: :user_name
 
 end
