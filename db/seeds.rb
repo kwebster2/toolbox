@@ -1,22 +1,14 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-Category.create(name: "Rails", cohort_id: 1)
-Category.create(name: "JavaScript", cohort_id: 1)
-Category.create(name: "jQuery", cohort_id: 1)
+Cohort.default_cohorts
+Category.default_categories
 
-Subject.create(name: "Authentication", category_id: 1)
-Subject.create(name: "Objects", category_id: 2)
-Subject.create(name: "Animations", category_id: 3)
+r = Resource.create(name: "Remote Authentication", description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, quidem nam molestiae laboriosam deleniti itaque, hic asperiores voluptates aut quod cum, assumenda officiis, facere nostrum consectetur iure eveniet iste laudantium.", url: "https://medium.com/@kevin.r.webster/third-party-authentication-bb6aca7fee0c#.z60ktcm9b", category_id: 1, user_id: 1)
+s = Resource.create(name: "Sick Blog", description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, quidem nam molestiae laboriosam deleniti itaque, hic asperiores voluptates aut quod cum, assumenda officiis, facere nostrum consectetur iure eveniet iste laudantium.", url: "https://google.com", category_id: 3, user_id: 1)
+Resource.create(name: "Programming stuff", description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, quidem nam molestiae laboriosam deleniti itaque, hic asperiores voluptates aut quod cum, assumenda officiis, facere nostrum consectetur iure eveniet iste laudantium.", url: "https://google.com", category_id: 2, user_id: 1)
+Resource.create(name: "Yeah", description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, quidem nam molestiae laboriosam deleniti itaque, hic asperiores voluptates aut quod cum, assumenda officiis, facere nostrum consectetur iure eveniet iste laudantium.", url: "https://google.com", category_id: 3, user_id: 3)
+Resource.create(name: "Searching for Sugarman", description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, quidem nam molestiae laboriosam deleniti itaque, hic asperiores voluptates aut quod cum, assumenda officiis, facere nostrum consectetur iure eveniet iste laudantium.", url: "https://google.com", category_id: 5, user_id: 3)
+Resource.create(name: "That thing from yesterday", description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, quidem nam molestiae laboriosam deleniti itaque, hic asperiores voluptates aut quod cum, assumenda officiis, facere nostrum consectetur iure eveniet iste laudantium.", url: "https://google.com", category_id: 4, user_id: 2)
 
-r = Resource.create(name: "Remote Authentication", url: "https://medium.com/@kevin.r.webster/third-party-authentication-bb6aca7fee0c#.z60ktcm9b", subject_id: 1)
-Resource.create(name: "Sick Blog", url: "https://google.com", subject_id: 3)
+r.tags << Tag.create(name: "Authentication")
+s.tags << Tag.create(name: "")
 
-r.tags << Tag.create(name: "Rails")
 
-Cohort.create(name: "Web Development")
-Cohort.create(name: "iOS")

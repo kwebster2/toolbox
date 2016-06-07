@@ -8,9 +8,7 @@ Rails.application.routes.draw do
 
   # Nested Resources
   resources :cohorts, param: :slug do
-    resources :categories, param: :slug do
-      resources :subjects, param: :slug
-    end
+    resources :categories, param: :slug 
   end
 
   # Shallow Resources

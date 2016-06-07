@@ -1,15 +1,16 @@
 <%= render 'layouts/navbar' %>
+<%= render 'categories/new_category_modal' %>
 
 <div class="container-fluid">
   
   <div class="page-header">
-    <h2>Categories <small>Select a category to browse</small></h2> 
+    <h2><%= @cohort.name %> <small>Select a category to browse</small></h2> 
   </div>
 
   <div class="col-md-8" id="newsfeed">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Recent Additions:</h3>
+        <h3 class="panel-title">Newsfeed</h3>
       </div>    
       <div class="panel-body">
       <% @cohort.resources.order(created_at: :desc).limit(10).each do |r| %>
@@ -22,7 +23,7 @@
           <% end %>
           </div>
           <div class="media-body">
-              <h4 class="media-heading"><%= r.name %><small> | <%= r.subject.category.name %> | <%= r.subject.name %></small></h4> 
+              <h4 class="media-heading"><%= r.name %><small> | <%= r.category.name %></small></h4> 
               <p><%= r.short_description %></p>              
           </div>
           <div class="media-right">
@@ -41,20 +42,20 @@
   <div class="col-md-4" id="category_tree">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">All categories:</h3>
+        <h3 class="panel-title">All categories</h3>
       </div>    
       <div class="panel-body">
         <div class="list-group">
         <% @cohort.categories.each do |c| %>
-          <%= link_to cohort_category_path(@cohort.slug, c.slug), class: "list-group-item" do %> 
-            <span class="badge"><%= c.subjects.length %></span>
+          <%= link_to '#', class: "list-group-item" do %> 
+            <span class="badge"><%= c.tags.length %></span>
             <%= c.name %>
           <% end %>
         <% end %>
         </div>
         <div class="pull-right">
-        <%= button_to "+Add Category", new_cohort_category_path(@cohort.slug), class: "btn btn-info", method: 'get' %>
-        </div>
+          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#categoryModel">+Add Category
+      </button>        
       </div>
     </div>
   </div>
