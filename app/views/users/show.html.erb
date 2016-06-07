@@ -12,7 +12,7 @@
       </div>
       <div class="panel-body">
         <ul class="list-group">
-          <% @user.bookmarks.each do |b| %>
+          <% @user.bookmarks.reverse.each do |b| %>
             <div class="media newsfeed-item">              
               <div class="media-left">
               <% if !b.user.nil? && !b.user.avatar_url.nil? %>
@@ -49,12 +49,12 @@
       <div class="panel-body">
         <div class="list-group">
           <% @user.resources.each do |r| %>
-          
-          <div class="list-group-item">
-            <span class="pull-right"><%= link_to "Edit", '#', data: {toggle: "modal", target: "#resourceModel_#{r.id}"} %> | <%= link_to "Delete", resource_path(r), method: :delete %></span>
-            <h5><%= r.name %></h5>
+            <div class="list-group-item user-post-item">
+              <span class="pull-right"><%= link_to "Edit", '#', data: {toggle: "modal", target: "#resourceModel_#{r.id}"} %> | <%= link_to "Delete", resource_path(r), method: :delete %></span>
+              <h5><%= r.name %></h5>
             <p><%= r.short_description %></p>
-          </div>
+            </div>
+            <!-- Edit modals -->
             <div class="modal fade" id="resourceModel_<%=r.id%>" tabindex="-1" role="dialog" aria-labelledby="resourceModelLabel">
               <%= render 'resources/edit_resource_modal', resource: r %>
             </div>
