@@ -5,7 +5,6 @@ class ResourcesController < ApplicationController
   end
 
   def create
-    binding.pry
     @resource = Resource.create(resource_params)
     @resource.user = current_user
     tags = parse_tags(params["resource"]["tags"])
@@ -14,7 +13,14 @@ class ResourcesController < ApplicationController
       @resource.tags << t
     end
     @resource.save
-    redirect_to cohort_path(@resource.category.cohort.slug)
+
+    refer = request.env["HTTP_REFERER"].split("/")
+
+    if refer.length > 5
+      redirect_to cohort_category_path(refer[refer.length-3], refer.last)
+    else
+      redirect_to cohort_path(@resource.category.cohort.slug)
+    end
   end
 
   def bookmark
