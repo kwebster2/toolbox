@@ -9,6 +9,22 @@ class Resource < ActiveRecord::Base
     user_bookmarked?(user) ? unbookmark(user) : bookmark(user)
   end
 
+  def bookmarks_count(user)
+    if bookmarks.count == 1
+      "#{bookmarks.count} save".html_safe
+    else
+      "#{bookmarks.count} saves".html_safe
+    end
+  end
+
+  def save_text(user)
+    if user_bookmarked?(user)
+      "Saved"
+    else
+      "Save"
+    end
+  end
+
   def star_class(user)
     if user_bookmarked?(user)
       "glyphicon glyphicon-star"
