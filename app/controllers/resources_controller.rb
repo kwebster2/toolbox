@@ -6,7 +6,7 @@ class ResourcesController < ApplicationController
 
   def create
     @resource = Resource.create(resource_params)
-    redirect_to cohort_category_subject_path(@resource.subject.category.cohort.slug, @resource.subject.category.slug, @resource.subject.slug)
+    redirect_to cohort_category_path(@resource.category.cohort.slug, @resource.category.slug)
   end
 
   def bookmark
@@ -19,7 +19,6 @@ class ResourcesController < ApplicationController
   end
 
   private
-
   def resource_params
     params.require(:resource).permit(:name, :description, :url, :subject_id)
   end

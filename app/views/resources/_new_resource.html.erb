@@ -1,0 +1,32 @@
+<%= form_for :resource do |f| %>
+
+<div class="modal fade" id="resourceModel" tabindex="-1" role="dialog" aria-labelledby="resourceModelLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <img src="<%= current_user.avatar_url %>" class="navbar-avatar"><b><%= current_user.user_name %></b>
+        <div class="pull-right">
+          <span>
+            Category: <%= f.collection_select :category_id, Category.all, :id, :name, selected: @subject.category.id %>
+          </span>
+          <span>
+            Subject: <%= f.collection_select :subject_id, Subject.all, :id, :name, selected: @subject.id %>
+          </span>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <%= f.text_field :title, placeholder: 'Resource title (required)', class: 'form-control' %>
+        <%= f.text_field :url, placeholder: 'URL (required)', class: 'form-control' %>
+        <%= f.text_area :description, placeholder: 'Enter a short description (optional)', class: 'form-control' %>
+      </div>
+
+      <div class="modal-footer">
+         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         <%= f.submit "Save Resource", class: 'btn btn-info' %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
