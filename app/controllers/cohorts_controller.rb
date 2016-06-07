@@ -6,11 +6,11 @@ class CohortsController < ApplicationController
   end
 
   def show
-    @resource = Resource.new
   end
 
   private
   def set_cohort
     @cohort = Cohort.find_by(slug: params[:slug])
+    @resource = Resource.new
   end
 end

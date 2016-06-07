@@ -3,63 +3,7 @@
 <%= render 'resources/new_resource_modal' %>
 
 <div class="container-fluid">
-
-  <div class="page-header">
-    <div class="pull-right">
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#resourceModel">+Post Resource
-      </button>
-    </div>
-    <h2><%= @cohort.name %> <small>Select a category to browse</small></h2> 
-  </div>
-
-  <div class="col-md-8" id="newsfeed">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Newsfeed</h3>
-      </div>    
-      <div class="panel-body">
-      <% @cohort.resources.order(created_at: :desc).limit(10).each do |r| %>
-        <div class="media newsfeed-item">
-          <div class="media-left">
-          <% if !r.user.nil? && !r.user.avatar_url.nil? %>
-            <img src="<%= r.user.avatar_url %>" alt="<%= r.user.name %>" class="navbar-avatar">
-          <% else %>
-            <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" alt="" class="navbar-avatar">
-          <% end %>
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading"><%= r.name %><small> | <%= r.category.name %></small></h4> 
-            <p><%= r.short_description %></p>              
-          </div>
-          <div class="media-right">
-              <span class="bookmark" resource_parent_id="<%= r.id %>">
-                <%= render partial: "resources/resource_bookmarks", locals: {resource: r}%>
-              </span>
-          </div>
-        </div>
-      <% end %>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-4" id="category_tree">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">All categories</h3>
-      </div>    
-      <div class="panel-body">
-        <div class="list-group">
-        <% @cohort.categories.each do |c| %>
-          <%= link_to '#', class: "list-group-item" do %> 
-            <span class="badge"><%= c.tags.length %></span>
-            <%= c.name %>
-          <% end %>
-        <% end %>
-        </div>
-        <div class="pull-right">
-          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#categoryModel">+Add Category
-      </button>        
-      </div>
-    </div>
-  </div>
+  <%= render 'layouts/page_header' %>
+  <%= render 'resources/newsfeed' %>
+  <%= render 'resources/category_tree' %>
 </div>
