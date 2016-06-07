@@ -1,8 +1,16 @@
-describe 'create new category' do
-  let! (:webdev) {Cohort.create(name: "Web Development")}
+feature 'Capybara: Create Resource', :js => true do
+  before :each do
+    visit '/'
+    click_link 'Sign In'
+  end
 
-  it 'can create new category' do
+  scenario 'can create new resource' do
     visit '/cohorts/web-development'
-    click_button '+Add Category'
+    click_button('+Post Resource')
+    fill_in('resource_name', :with => 'Google')
+    fill_in('resource_url', :with => 'https://www.google.com')
+    select('Rails', :from => 'resource_category_id')
+    click_button('Save Resource')
+    expect(page).to have_content("Google")
   end
 end
