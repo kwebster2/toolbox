@@ -9,7 +9,13 @@ class CategoriesController < ApplicationController
     category = Category.find_or_create_by(category_params)
     category.update(cohort_id: params["cohort_id"])
     category.save
-    redirect_to cohort_path(category.cohort.slug)
+
+    refer = request.env["HTTP_REFERER"].split("/")
+    if refer.length > 5
+      redirect_to cohort_category_path(refer[refer.length-3], category.slug)
+    else
+      redirect_to cohort_path(category.cohort.slug)
+    end
   end
 
   def show
