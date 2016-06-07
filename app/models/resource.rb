@@ -5,6 +5,9 @@ class Resource < ActiveRecord::Base
   has_many   :tags, through: :resources_tags
   has_many   :bookmarks
 
+  validates :name, presence: true
+  validates :url, presence: true
+
   def add_bookmark(user)
     user_bookmarked?(user) ? unbookmark(user) : bookmark(user)
   end

@@ -1,4 +1,4 @@
-<%= form_for :resource do |f| %>
+<%= form_for @resource do |f| %>
 
 <div class="modal fade" id="resourceModel" tabindex="-1" role="dialog" aria-labelledby="resourceModelLabel">
   <div class="modal-dialog" role="document">
@@ -6,20 +6,22 @@
       
       <div class="modal-header">
         <img src="<%= current_user.avatar_url %>" class="navbar-avatar"><b><%= current_user.user_name %></b>
-        <div class="pull-right">
-          <span>
-            Category: <%= f.collection_select :category_id, Category.all, :id, :name, selected: @subject.category.id %>
-          </span>
-          <span>
-            Subject: <%= f.collection_select :subject_id, Subject.all, :id, :name, selected: @subject.id %>
-          </span>
-        </div>
+        <div class="pull-right"><span><h5><%= @cohort.name %> | New Post</h5></span></div>
       </div>
 
       <div class="modal-body">
-        <%= f.text_field :title, placeholder: 'Resource title (required)', class: 'form-control' %>
+        <%= f.label :name, "Resource" %>
+        <%= f.text_field :name, placeholder: 'Title (required)', class: 'form-control' %>
         <%= f.text_field :url, placeholder: 'URL (required)', class: 'form-control' %>
         <%= f.text_area :description, placeholder: 'Enter a short description (optional)', class: 'form-control' %>
+        <br>
+        <%= f.label :category %>
+        <%= f.collection_select :category_id, Category.all, :id, :name, {prompt: true}, {class: 'form-control'} %>
+        <br>
+        <%= f.fields_for :tags do |t| %>
+        <%= f.label :tags %>
+        <%= t.text_field :tags, placeholder: 'Enter tags separated by commas (eg: gems, rspec)', class: 'form-control' %>
+        <% end %>
       </div>
 
       <div class="modal-footer">

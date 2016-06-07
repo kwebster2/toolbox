@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   # Shallow Resources
   resources :tags
-  resources :resources, only: [:new]
+  resources :resources
   post 'resources/:id/bookmark', to: 'resources#bookmark', as: :bookmark
   resources :users, param: :user_name
 

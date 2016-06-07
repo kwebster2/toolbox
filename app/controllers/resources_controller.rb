@@ -6,7 +6,14 @@ class ResourcesController < ApplicationController
 
   def create
     @resource = Resource.create(resource_params)
-    redirect_to cohort_category_path(@resource.category.cohort.slug, @resource.category.slug)
+    @resource.user = current_user
+    tags = parse_tags(params["resource"]["tags"])
+    tags.each do |tag|
+      t = Tag.find_or_create_by(name: tag)
+      @resource.tags << t
+    end
+    @resource.save
+    redirect_to cohort_path(@resource.category.cohort.slug)
   end
 
   def bookmark
@@ -20,6 +27,12 @@ class ResourcesController < ApplicationController
 
   private
   def resource_params
-    params.require(:resource).permit(:name, :description, :url, :subject_id)
+    params.require(:resource).permit(:name, :description, :url, :category_id)
+  end
+
+  def parse_tags(hash_string)
+    hash_string.values.first.split(",").map do |x|
+      x.chomp.strip
+    end
   end
 end
