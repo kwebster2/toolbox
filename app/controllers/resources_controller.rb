@@ -32,6 +32,13 @@ class ResourcesController < ApplicationController
     end
   end
 
+  def destroy
+    resource = Resource.find(params[:id])
+    user = resource.user
+    resource.destroy
+    redirect_to user_path(user.user_name)
+  end
+
   private
   def resource_params
     params.require(:resource).permit(:name, :description, :url, :category_id)
