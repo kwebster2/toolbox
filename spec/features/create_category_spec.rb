@@ -1,8 +1,19 @@
-describe 'create new category' do
-  let! (:webdev) {Cohort.create(name: "Web Development")}
+feature 'Capybara: Resources', :js => true do
+  before :each do
+    visit '/'
+    click_link('Sign In')
+    click_link('Web')
+  end
 
-  it 'can create new category' do
-    visit '/cohorts/web-development'
-    click_button '+Add Category'
+  scenario 'can create new resource' do
+    click_button('+Post Resource')
+    within("div.modal-content") do
+      fill_in('resource_name', :with => 'Google')
+      fill_in('resource_url', :with => 'https://www.google.com')
+      select('Rails', :from => 'resource_category_id')
+      click_button('Save Resource')
+    end
+    wait_for_ajax
+    expect(Resource.last.name).to eq("Google")
   end
 end

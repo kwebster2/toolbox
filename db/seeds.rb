@@ -11,4 +11,4 @@ Resource.create(name: "That thing from yesterday", description: "Lorem ipsum dol
 r.tags << Tag.create(name: "Authentication")
 s.tags << Tag.create(name: "")
 
-
+Bookmark.create(user_id: 1, resource_id: 1)

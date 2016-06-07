@@ -1,5 +1,4 @@
 describe "sign in with Github" do
-  let! (:webdev) {Cohort.create(name: "Web Development")}
 
   it 'can sign in a user with Github account' do
     visit '/'
