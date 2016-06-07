@@ -1,0 +1,7 @@
+<%= button_to bookmark_path(id: resource.id), class:"btn btn-default btn-sm", method: :post, remote: true do %>
+  <div class="bookmark-btn" resource_id="<%= resource.id %>">
+    <%= resource.save_text(current_user) %> <span class="<%= resource.star_class(current_user) %>"></span>
+  </div>
+<% end %>
+<div class="extra-small" resource_count_id="<%= resource.id %>"><%= resource.bookmarks_count(current_user)%>
+</div>

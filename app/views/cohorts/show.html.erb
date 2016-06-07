@@ -1,16 +1,16 @@
 <%= render 'layouts/navbar' %>
 
 <div class="container-fluid">
-  
+
   <div class="page-header">
-    <h2>Categories <small>Select a category to browse</small></h2> 
+    <h2>Categories <small>Select a category to browse</small></h2>
   </div>
 
   <div class="col-md-8" id="newsfeed">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Recent Additions:</h3>
-      </div>    
+      </div>
       <div class="panel-body">
       <% @cohort.resources.order(created_at: :desc).limit(10).each do |r| %>
         <div class="media newsfeed-item">
@@ -22,18 +22,16 @@
           <% end %>
           </div>
           <div class="media-body">
-              <h4 class="media-heading"><%= r.name %><small> | <%= r.subject.category.name %> | <%= r.subject.name %></small></h4> 
-              <p><%= r.short_description %></p>              
+              <h4 class="media-heading"><%= r.name %><small> | <%= r.subject.category.name %> | <%= r.subject.name %></small></h4>
+              <p><%= r.short_description %></p>
           </div>
           <div class="media-right">
-            <button class="btn btn-default btn-sm">
-              Save
-              <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
-            </button>
-            <p class="extra-small">13 saves</p>
+              <span class="bookmark" resource_parent_id="<%= r.id %>">
+                <%= render partial: "resources/resource_bookmarks", locals: {resource: r}%>
+              </span>
           </div>
         </div>
-      <% end %>            
+      <% end %>
       </div>
     </div>
   </div>
@@ -42,11 +40,11 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">All categories:</h3>
-      </div>    
+      </div>
       <div class="panel-body">
         <div class="list-group">
         <% @cohort.categories.each do |c| %>
-          <%= link_to cohort_category_path(@cohort.slug, c.slug), class: "list-group-item" do %> 
+          <%= link_to cohort_category_path(@cohort.slug, c.slug), class: "list-group-item" do %>
             <span class="badge"><%= c.subjects.length %></span>
             <%= c.name %>
           <% end %>
@@ -59,4 +57,3 @@
     </div>
   </div>
 </div>
-
