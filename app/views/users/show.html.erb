@@ -5,6 +5,7 @@
     <h2>User Profile <small><%= @user.name %></small></h2>
   </div>
 
+<!-- REFACTOR THIS SO THAT IT CAN USE NEWFEED PARTIAL -->
   <div class="col-md-8" id="newsfeed-bookmarks">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -32,12 +33,26 @@
                   <%= render partial: "resources/resource_bookmarks", locals: {resource: b.resource}%>
                 </span>
               </div>
+              <div class="media-thumbnail">
+                <% if !b.resource.thumbnail.nil? %>
+                <%= render partial: 'thumbnails/resource_thumbnail', locals: {thumbnail: b.resource.thumbnail, url: b.resource.url} %>
+                <% end %>
+              </div>
+              <div class="media-footer">
+                <h4><small><b>Tags:</b>
+                <% b.resource.tags.each_with_index do |t, i| %>
+                <%= t.name %>
+                <%= i == b.resource.tags.length - 1 ? "" : '/' %>
+                <% end %>
+                </small></h4>
+              </div>
             </div>
           <% end %>
         </ul>
       </div>
     </div>
   </div>
+<!-- REFACTOR END-->
 
   <div class="col-md-4" id="user_posts_tree">
     <div class="panel panel-default">

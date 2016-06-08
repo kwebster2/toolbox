@@ -26,14 +26,20 @@
         </div>
         <div class="media-thumbnail">
           <% if !r.thumbnail.nil? %>
-          <%= render partial: 'thumbnails/resource_thumbnail', locals: {thumbnail: r.thumbnail} %>
+            <%= render partial: 'thumbnails/resource_thumbnail', locals: {thumbnail: r.thumbnail, url: r.url} %>
+          <% else %>
+            <div class="well">Link: <%= link_to r.url %></div>
           <% end %>
         </div>
         <div class="media-footer">
           <h4><small><b>Tags:</b>
-          <% r.tags.each_with_index do |t, i| %>
-          <%= t.name %>
-          <%= i == r.tags.length - 1 ? "" : '/' %>
+          <% if r.tags.empty? %>
+            None
+          <% else %> 
+            <% r.tags.each_with_index do |t, i| %>
+              <%= t.name %>
+              <%= i == r.tags.length - 1 ? "" : '/' %>
+            <% end %>
           <% end %>
           </small></h4>
         </div>
