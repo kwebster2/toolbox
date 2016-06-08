@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   # Nested Resources
   get 'cohorts/:slug/tags', to: 'cohorts#show', as: 'cohort_tags'
+  post 'cohorts/:slug/tags', to: 'cohorts#search'
   get '/tags', to: 'tags#index', as: 'tags'
   resources :cohorts, param: :slug do
     resources :categories, param: :slug

@@ -1,10 +1,9 @@
 <div class="col-md-8" id="newsfeed">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">Latest Resources</h3>
+      <h3 class="panel-title", id="resource-feed-title">Latest Resources</h3>
     </div>
     <div class="panel-body">
-    <!-- <% @category.nil? ? source = @cohort : source = @category %> -->
     <% @resources.order(created_at: :desc).offset(0).limit(10).each do |r| %>
       <div class="media newsfeed-item">
         <div class="media-left">
@@ -29,7 +28,7 @@
     <div class="panel-footer">
       <div class="btn-toolbar" role="toolbar" aria-label="...">
         <div class="btn-group pull-right" role="group" class="btn btn-default">
-            <% i = source.resources.length %>
+            <% i = @resources.length %>
             <% j = 0 %>
             <% a = i/10 %>
             <% if a < 1 %>
