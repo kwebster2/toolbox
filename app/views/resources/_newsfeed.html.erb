@@ -2,10 +2,10 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Latest Resources</h3>
-    </div>    
+    </div>
     <div class="panel-body">
-    <% @category.nil? ? source = @cohort : source = @category %>
-    <% source.resources.order(created_at: :desc).offset(0).limit(10).each do |r| %>
+    <!-- <% @category.nil? ? source = @cohort : source = @category %> -->
+    <% @resources.order(created_at: :desc).offset(0).limit(10).each do |r| %>
       <div class="media newsfeed-item">
         <div class="media-left">
         <% if !r.user.nil? && !r.user.avatar_url.nil? %>
@@ -15,8 +15,8 @@
         <% end %>
         </div>
         <div class="media-body">
-          <h4 class="media-heading"><%= r.name %><small> | <%= r.category.name %></small></h4> 
-          <p><%= r.short_description %></p>              
+          <h4 class="media-heading"><%= r.name %><small> | <%= r.category.name %></small></h4>
+          <p><%= r.short_description %></p>
         </div>
         <div class="media-right">
             <span class="bookmark" resource_parent_id="<%= r.id %>">
@@ -36,11 +36,11 @@
               <button type="button" class="btn btn-default scroll-feed">1-<%=i%></button>
             <% else %>
               <% a.times do %>
-              <button type="button" class="btn btn-default scroll-feed"><%=j+1%>-<%=j+10%></button>    
+              <button type="button" class="btn btn-default scroll-feed"><%=j+1%>-<%=j+10%></button>
               <% j += 10 %>
               <% end %>
               <button type="button" class="btn btn-default scroll-feed"><%=j+1%>-<%=i%></button>
-            <% end %>  
+            <% end %>
         </div>
       </div>
     </div>
