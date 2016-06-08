@@ -1,0 +1,6 @@
+<div class="form-group">
+  <%= form_tag(tags_path(cohort.slug), method: "get") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search by tags", id: "tag-autocomplete" %>
+    <%= submit_tag "Search" %>
+  <% end %>
+</div>

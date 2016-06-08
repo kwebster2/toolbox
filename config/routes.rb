@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   # Shallow Resources
-  resources :tags
+  get '/cohort/:cohort_slug/tags', to: 'tags#index', as: 'tags'
   resources :resources
   post 'resources/:id/bookmark', to: 'resources#bookmark', as: :bookmark
   resources :users, param: :user_name

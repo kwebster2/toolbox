@@ -1,6 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "cohorts";
+@import "jquery-ui";
 
 .navbar-avatar{
   border-radius:50%;
@@ -11,4 +12,3 @@
 .navbar {
   margin-bottom: 0;
 }
-
