@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   post '/logout', to: 'sessions#destroy'
 
   # Nested Resources
-  get 'cohorts/:slug/tags', to: 'cohorts#show', as: 'cohort_tags'
   post 'cohorts/:slug/tags', to: 'cohorts#search'
   get '/tags', to: 'tags#index', as: 'tags'
   resources :cohorts, param: :slug do
@@ -19,6 +18,7 @@ Rails.application.routes.draw do
 
   resources :resources
   post 'resources/:id/bookmark', to: 'resources#bookmark', as: :bookmark
+  get 'cohorts/:slug/tags', to: 'cohorts#show', as: 'cohort_tags'
   resources :users, param: :user_name
 
 end

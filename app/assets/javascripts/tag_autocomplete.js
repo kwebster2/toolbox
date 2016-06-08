@@ -1,4 +1,4 @@
-$(function() {
+$(document).ready(function() {
 
   function split( val ) {
   return val.split( /,\s*/ );

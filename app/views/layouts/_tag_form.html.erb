@@ -1,4 +1,4 @@
-  <%= form_tag(cohort_tags_path(cohort.slug), method: :post, class: "navbar-form navbar-left", role: "search", remote: true, id: "search") do %>
+  <%= form_tag(cohort_tags_path(cohort.slug), method: :post, class: "navbar-form navbar-left", role: "search", remote: true, id: "search", autocomplete: "off") do %>
   <div class="form-group">
     <%= text_field_tag :search, params[:search], placeholder: "Search by tags", id: "tag-autocomplete", class: "controls" %>
   </div>

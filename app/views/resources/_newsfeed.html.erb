@@ -4,14 +4,14 @@
       <h3 class="panel-title", id="resource-feed-title">Latest Resources</h3>
     </div>
     <div class="panel-body">
-    <% @resources.order(created_at: :desc).offset(0).limit(10).each do |r| %>
+      <% @resources.order(created_at: :desc).each do |r| %>
       <div class="media newsfeed-item">
         <div class="media-left">
-        <% if !r.user.nil? && !r.user.avatar_url.nil? %>
+          <% if !r.user.nil? && !r.user.avatar_url.nil? %>
           <img src="<%= r.user.avatar_url %>" alt="<%= r.user.name %>" class="navbar-avatar">
-        <% else %>
+          <% else %>
           <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" alt="" class="navbar-avatar">
-        <% end %>
+          <% end %>
         </div>
         <div class="media-body">
           <div class="user-post">
@@ -26,43 +26,28 @@
         </div>
         <div class="media-thumbnail">
           <% if !r.thumbnail.nil? %>
-            <%= render partial: 'thumbnails/resource_thumbnail', locals: {thumbnail: r.thumbnail, url: r.url} %>
+          <%= render partial: 'thumbnails/resource_thumbnail', locals: {thumbnail: r.thumbnail, url: r.url} %>
           <% else %>
-            <div class="well">Link: <%= link_to r.url %></div>
+          <div class="well">Link: <%= link_to r.url %></div>
           <% end %>
         </div>
         <div class="media-footer">
           <h4><small><b>Tags:</b>
-          <% if r.tags.empty? %>
+            <% if r.tags.empty? %>
             None
-          <% else %> 
+            <% else %>
             <% r.tags.each_with_index do |t, i| %>
-              <%= t.name %>
-              <%= i == r.tags.length - 1 ? "" : '/' %>
+            <%= t.name %>
+            <%= i == r.tags.length - 1 ? "" : '/' %>
             <% end %>
-          <% end %>
+            <% end %>
           </small></h4>
         </div>
       </div>
-    <% end %>
+      <% end %>
     </div>
     <div class="panel-footer">
-      <div class="btn-toolbar" role="toolbar" aria-label="...">
-        <div class="btn-group pull-right" role="group" class="btn btn-default">
-            <% i = @resources.length %>
-            <% j = 0 %>
-            <% a = i/10 %>
-            <% if a < 1 %>
-              <button type="button" class="btn btn-default scroll-feed">1-<%=i%></button>
-            <% else %>
-              <% a.times do %>
-              <button type="button" class="btn btn-default scroll-feed"><%=j+1%>-<%=j+10%></button>
-              <% j += 10 %>
-              <% end %>
-              <button type="button" class="btn btn-default scroll-feed"><%=j+1%>-<%=i%></button>
-            <% end %>
-        </div>
-      </div>
+      <%= paginate @resources unless params[:search] %>
     </div>
   </div>
 </div>
