@@ -38,6 +38,12 @@ class Resource < ActiveRecord::Base
     end
   end
 
+  def active_class(user)
+    if user_bookmarked?(user)
+      "active"
+    end
+  end
+
   def short_description
     if description.nil?
       return
