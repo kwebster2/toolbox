@@ -1,2 +1,10 @@
 <% thumbnail %>
-<div class="well"></div>
+<div class="well well-sm">
+  <div class="container">
+    <div class="col-md-1 thumbnail"><%= image_tag thumbnail.image_url  %></div>
+    <div class="col-md-7">
+      <h4><%= thumbnail.title %></h4>
+      <p><%= thumbnail.description %></p>
+    </div>
+  </div>
+</div>

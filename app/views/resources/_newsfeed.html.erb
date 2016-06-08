@@ -18,26 +18,25 @@
             <h4 class="media-heading"><%= r.name %><small> | <%= r.category.name %></small></h4>
             <p><%= r.short_description %></p>
           </div>
-          <div class="well">
-            <div class="thumbnail col-md-3"></div>
-          </div>
-          <div class="media-body-footer">
-            <h4><small><b>Tags:</b>
-            <% r.tags.each_with_index do |t, i| %>
-            <%= t.name %>
-            <%= i == r.tags.length - 1 ? "" : '/' %>
-            <% end %>
-            </small></h4>
-          </div>
         </div>
         <div class="media-right">
           <span class="bookmark" resource_parent_id="<%= r.id %>">
             <%= render partial: "resources/resource_bookmarks", locals: {resource: r}%>
           </span>
         </div>
-        <% if !r.url.nil? %>
+        <div class="media-thumbnail">
+          <% if !r.thumbnail.nil? %>
           <%= render partial: 'thumbnails/resource_thumbnail', locals: {thumbnail: r.thumbnail} %>
-        <% end %>
+          <% end %>
+        </div>
+        <div class="media-footer">
+          <h4><small><b>Tags:</b>
+          <% r.tags.each_with_index do |t, i| %>
+          <%= t.name %>
+          <%= i == r.tags.length - 1 ? "" : '/' %>
+          <% end %>
+          </small></h4>
+        </div>
       </div>
     <% end %>
     </div>
