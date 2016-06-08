@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post '/logout', to: 'sessions#destroy'
 
   # Nested Resources
+  get 'cohorts/:slug/tags', to: 'cohorts#show', as: 'cohort_tags'
   get '/tags', to: 'tags#index', as: 'tags'
   resources :cohorts, param: :slug do
     resources :categories, param: :slug
