@@ -1,8 +1,12 @@
 <%= render 'layouts/navbar' %>
+<%= render 'resources/new_resource_modal' %>
 
 <div class="container-fluid">
   <div class="page-header">
-    <h2>User Profile <small><%= @user.name %></small></h2>
+    <div class="pull-right">
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#resourceModel">+Post Resource</button>
+    </div>
+      <h2>User Profile <small><%= @user.name %></small></h2>
   </div>
 
 <!-- REFACTOR THIS SO THAT IT CAN USE NEWFEED PARTIAL -->
@@ -13,7 +17,7 @@
       </div>
       <div class="panel-body">
         <ul class="list-group">
-          <% @user.bookmarks.reverse.each do |b| %>
+          <% @user.bookmarks.order(created_at: :desc).each do |b| %>
             <div class="media newsfeed-item">              
               <div class="media-left">
               <% if !b.user.nil? && !b.user.avatar_url.nil? %>

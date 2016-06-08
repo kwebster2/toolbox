@@ -3,10 +3,54 @@
     <div class="panel-heading">
       <h3 class="panel-title", id="resource-feed-title">Latest Resources</h3>
     </div>
-    <div class="panel-body" id="resources">
-      <div class="resource">
-        <%= render @resources %>
+    <div class="panel-body">
+      <% @resources.order(created_at: :desc).each do |r| %>
+      <div class="media newsfeed-item">
+        <div class="media-left">
+          <% if !r.user.nil? && !r.user.avatar_url.nil? %>
+          <img src="<%= r.user.avatar_url %>" alt="<%= r.user.name %>" class="navbar-avatar">
+          <% else %>
+          <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" alt="" class="navbar-avatar">
+          <% end %>
+        </div>
+        <div class="media-body">
+          <div class="user-post">
+            <h4 class="media-heading"><%= r.name %><small> | <%= r.category.name %></small></h4>
+            <p><%= r.short_description %></p>
+          </div>
+        </div>
+        <div class="media-right">
+          <span class="bookmark" resource_parent_id="<%= r.id %>">
+            <%= render partial: "resources/resource_bookmarks", locals: {resource: r}%>
+          </span>
+        </div>
+        <div class="media-thumbnail">
+          <% if !r.thumbnail.nil? %>
+          <%= render partial: 'thumbnails/resource_thumbnail', locals: {thumbnail: r.thumbnail, url: r.url} %>
+          <% else %>
+          <div class="well">Link: <%= link_to r.url %></div>
+          <% end %>
+        </div>
+        <div class="media-footer">
+          <% if r.user_id == current_user.id %>
+            <span class="pull-right"><%= link_to "Edit", '#', data: {toggle: "modal", target: "#resourceModel_#{r.id}"} %></span>
+            <div class="modal fade" id="resourceModel_<%=r.id%>" tabindex="-1" role="dialog" aria-labelledby="resourceModelLabel">
+              <%= render 'resources/edit_resource_modal', resource: r %>
+            </div>
+          <% end %>
+          <h4><small><b>Tags:</b>
+            <% if r.tags.empty? %>
+            None
+            <% else %>
+            <% r.tags.each_with_index do |t, i| %>
+            <%= t.name %>
+            <%= i == r.tags.length - 1 ? "" : '/' %>
+            <% end %>
+            <% end %>
+          </small></h4>
+        </div>
       </div>
+      <% end %>
     </div>
     <div class="panel-footer">
       <%= paginate @resources unless params[:search] %>

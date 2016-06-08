@@ -5,7 +5,7 @@
     </div>    
     <div class="panel-body">
       <div class="list-group">
-      <% @cohort.categories.each do |c| %>
+      <% @cohort.categories.order(resources_count: :desc).each do |c| %>
           <% !@category.nil? && c.name == @category.name ? x = 'list-group-item active' : x = 'list-group-item' %>
         <%= link_to cohort_category_path(@cohort.to_slug, c.to_slug), class: x do %> 
           <span class="badge"><%= c.resources.length %></span>

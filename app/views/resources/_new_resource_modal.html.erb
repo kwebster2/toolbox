@@ -6,7 +6,7 @@
       
       <div class="modal-header">
         <img src="<%= current_user.avatar_url %>" class="navbar-avatar"><b><%= current_user.user_name %></b>
-        <div class="pull-right"><span><h5><%= @cohort.name %> | New Post</h5></span></div>
+        <div class="pull-right"><span><h5><%= @cohort.nil? ? "User" : @cohort.name %> | New Post</h5></span></div>
       </div>
 
       <div class="modal-body">
@@ -16,7 +16,7 @@
         <%= f.text_area :description, placeholder: 'Enter a short description (optional)', class: 'form-control' %>
         <br>
         <%= f.label :category %>
-        <%= f.collection_select :category_id, @cohort.categories.all, :id, :name, {prompt: true}, {class: 'form-control'} %>
+        <%= f.collection_select :category_id, @cohort.nil? ? Category.all : @cohort.categories.all, :id, :name, {prompt: true}, {class: 'form-control'} %>
         <br>
         <%= f.fields_for :tags do |t| %>
         <%= f.label :tags %>
