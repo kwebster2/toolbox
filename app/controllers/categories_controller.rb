@@ -19,6 +19,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    @resources = @category.resources
   end
 
   private
