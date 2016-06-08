@@ -1,7 +1,7 @@
 class Resource < ActiveRecord::Base
   belongs_to :user
-  belongs_to :category
-  
+  belongs_to :category, counter_cache: true
+
   has_many   :resources_tags
   has_many   :tags, through: :resources_tags
   has_many   :bookmarks
