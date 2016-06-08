@@ -1,22 +1,21 @@
 class Thumbnail < ActiveRecord::Base
   belongs_to :resource
 
-  def self.parse(url)
-    u = valid_url(url)
+  def self.parse(resource_url)
+    u = valid_url(resource_url)
+    return u
   end
 
   private
-  def self.valid_url(url)
-    x = url.split("/")
-    if x.first.include?("http")
-      if x[1].include?("www.")
-        return url 
-      else
-        x[1] = "www."
-      end
+  def self.valid_url(resource_url)
+    uri = URI(resource_url)
+    if uri.scheme.nil? && uri.host.nil?
+      url = 'http://'+ uri.path
+    elsif uri.scheme == 'https://'
+      url = 'http://'+ uri.path
     else
-      x.unshift("http://")
-      return x.join
+      url = uri.to_s
     end
+    return url
   end
 end
