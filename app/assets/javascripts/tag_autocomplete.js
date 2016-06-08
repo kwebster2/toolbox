@@ -18,8 +18,8 @@ $(function() {
        .autocomplete({
          source: function( request, response ) {
           // Group the groupslug from the path (e.g. google/memes/new)
-          var cohort_slug = window.location.pathname.split('/')[2]
-          var retrieve_tags_url = "/cohorts/" + cohort_slug + "/tags"
+          // var cohort_slug = window.location.pathname.split('/')[2]
+          var retrieve_tags_url = "/tags"
            $.getJSON(retrieve_tags_url, {
              term: extractLast( request.term )
            }, response );

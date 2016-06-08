@@ -1,6 +1,6 @@
-<div class="form-group">
-  <%= form_tag(tags_path(cohort.slug), method: "get") do %>
+  <%= form_tag(tags_path, method: "get", class: "navbar-form navbar-left", role: "search") do %>
+  <div class="form-group">
     <%= text_field_tag :search, params[:search], placeholder: "Search by tags", id: "tag-autocomplete" %>
-    <%= submit_tag "Search" %>
+  </div>
+    <%= submit_tag "Search", class: "btn btn-default" %>
   <% end %>
-</div>

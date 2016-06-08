@@ -7,12 +7,13 @@ Rails.application.routes.draw do
   post '/logout', to: 'sessions#destroy'
 
   # Nested Resources
+  get '/tags', to: 'tags#index', as: 'tags'
   resources :cohorts, param: :slug do
     resources :categories, param: :slug
   end
 
   # Shallow Resources
-  get '/cohort/:cohort_slug/tags', to: 'tags#index', as: 'tags'
+
   resources :resources
   post 'resources/:id/bookmark', to: 'resources#bookmark', as: :bookmark
   resources :users, param: :user_name
