@@ -19,10 +19,13 @@
           <p><%= r.short_description %></p>              
         </div>
         <div class="media-right">
-            <span class="bookmark" resource_parent_id="<%= r.id %>">
-              <%= render partial: "resources/resource_bookmarks", locals: {resource: r}%>
-            </span>
+          <span class="bookmark" resource_parent_id="<%= r.id %>">
+            <%= render partial: "resources/resource_bookmarks", locals: {resource: r}%>
+          </span>
         </div>
+        <% if !r.url.nil? %>
+          <%= render partial: 'thumbnails/resource_thumbnail', locals: {thumbnail: r.thumbnail} %>
+        <% end %>
       </div>
     <% end %>
     </div>
