@@ -32,6 +32,12 @@
           <% end %>
         </div>
         <div class="media-footer">
+          <% if r.user_id == current_user.id %>
+            <span class="pull-right"><%= link_to "Edit", '#', data: {toggle: "modal", target: "#resourceModel_#{r.id}"} %></span>
+            <div class="modal fade" id="resourceModel_<%=r.id%>" tabindex="-1" role="dialog" aria-labelledby="resourceModelLabel">
+              <%= render 'resources/edit_resource_modal', resource: r %>
+            </div>
+          <% end %>
           <h4><small><b>Tags:</b>
             <% if r.tags.empty? %>
             None

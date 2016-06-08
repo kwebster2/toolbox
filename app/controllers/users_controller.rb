@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   private
   def set_user
-    @user = User.find_by(user_name: params[:user_name])
+    @user = current_user
+    @resource = Resource.new
   end
 end

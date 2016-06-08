@@ -8,6 +8,16 @@ class ResourcesController < ApplicationController
     @resource = Resource.find(params[:id])
   end
 
+  def update
+    resource = Resource.find(params[:id])
+    if resource.update(resource_params)
+      resource.save
+      redirect_to cohort_path(resource.category.cohort.slug)
+    else
+      redirect_to user_path(current_user)
+    end
+  end
+
   def create
     # Create resource and associate user
     @resource = Resource.create(resource_params)
@@ -21,12 +31,16 @@ class ResourcesController < ApplicationController
     end
 
     # Create thumbnail and associate to resource
-    @thumb_data = LinkThumbnailer.generate(Thumbnail.parse(@resource.url))
-    thumbnail = Thumbnail.find_or_create_by(url: @thumb_data.url.to_s)
-    thumbnail.update(image_url: @thumb_data.images.first.src.to_s, description: @thumb_data.description, title: @thumb_data.title, favicon: @thumb_data.favicon, resource_id: @resource.id)
-    thumbnail.save
-    @resource.thumbnail = thumbnail
-
+    begin
+      @thumb_data = LinkThumbnailer.generate(Thumbnail.parse(@resource.url))
+      thumbnail = Thumbnail.find_or_create_by(url: @thumb_data.url.to_s)
+      thumbnail.update(image_url: @thumb_data.images.first.src.to_s, description: @thumb_data.description, title: @thumb_data.title, favicon: @thumb_data.favicon, resource_id: @resource.id)
+      thumbnail.save
+      @resource.thumbnail = thumbnail
+    rescue LinkThumbnailer::Exceptions => e
+      @resource.thumbnail = nil
+    end
+    
     # Save resource and redirect
     @resource.save
     refer = request.env["HTTP_REFERER"].split("/")
