@@ -1,12 +1,13 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "cohorts";
+@import "users";
 @import "jquery-ui";
 
 .navbar-avatar{
   border-radius:50%;
   width:30px;
-  margin-right:5px;
+  margin-right: 10px;
 }
 
 .navbar {
