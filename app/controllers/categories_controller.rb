@@ -19,7 +19,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @resources = @category.resources
+    @resources = @category.resources.page(params[:page]).per(10)
   end
 
   private

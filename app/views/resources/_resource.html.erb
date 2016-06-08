@@ -1,0 +1,39 @@
+<div class="media newsfeed-item">
+  <div class="media-left">
+    <% if !resource.user.nil? && !resource.user.avatar_url.nil? %>
+    <img src="<%= resource.user.avatar_url %>" alt="<%= resource.user.name %>" class="navbar-avatar">
+    <% else %>
+    <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" alt="" class="navbar-avatar">
+    <% end %>
+  </div>
+  <div class="media-body">
+    <div class="user-post">
+      <h4 class="media-heading"><%= resource.name %><small> | <%= resource.category.name %></small></h4>
+      <p><%= resource.short_description %></p>
+    </div>
+  </div>
+  <div class="media-right">
+    <span class="bookmark" resource_parent_id="<%= resource.id %>">
+      <%= render partial: "resources/resource_bookmarks", locals: {resource: resource}%>
+    </span>
+  </div>
+  <div class="media-thumbnail">
+    <% if !resource.thumbnail.nil? %>
+    <%= render partial: 'thumbnails/resource_thumbnail', locals: {thumbnail: resource.thumbnail, url: resource.url} %>
+    <% else %>
+    <div class="well">Link: <%= link_to resource.url %></div>
+    <% end %>
+  </div>
+  <div class="media-footer">
+    <h4><small><b>Tags:</b>
+      <% if resource.tags.empty? %>
+      None
+      <% else %>
+      <% resource.tags.each_with_index do |t, i| %>
+      <%= t.name %>
+      <%= i == resource.tags.length - 1 ? "" : '/' %>
+      <% end %>
+      <% end %>
+    </small></h4>
+  </div>
+</div>
