@@ -41,6 +41,8 @@ class Resource < ActiveRecord::Base
   def active_class(user)
     if user_bookmarked?(user)
       "active"
+    else
+      ""
     end
   end
 
