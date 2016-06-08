@@ -9,17 +9,27 @@ class ResourcesController < ApplicationController
   end
 
   def create
+    # Create resource and associate user
     @resource = Resource.create(resource_params)
     @resource.user = current_user
+    
+    # Create tags and associate to resource
     tags = parse_tags(params["resource"]["tags"])
     tags.each do |tag|
       t = Tag.find_or_create_by(name: tag)
       @resource.tags << t
     end
+
+    # Create thumbnail and associate to resource
+    @thumb_data = LinkThumbnailer.generate(Thumbnail.parse(@resource.url))
+    thumbnail = Thumbnail.find_or_create_by(url: @thumb_data.url.to_s)
+    thumbnail.update(image_url: @thumb_data.images.first.src.to_s, description: @thumb_data.description, title: @thumb_data.title, favicon: @thumb_data.favicon, resource_id: @resource.id)
+    thumbnail.save
+    @resource.thumbnail = thumbnail
+
+    # Save resource and redirect
     @resource.save
-
     refer = request.env["HTTP_REFERER"].split("/")
-
     if refer.length > 5
       redirect_to cohort_category_path(refer[refer.length-3], refer.last)
     else

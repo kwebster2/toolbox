@@ -35,6 +35,9 @@
             <%= render partial: "resources/resource_bookmarks", locals: {resource: r}%>
           </span>
         </div>
+        <% if !r.url.nil? %>
+          <%= render partial: 'thumbnails/resource_thumbnail', locals: {thumbnail: r.thumbnail} %>
+        <% end %>
       </div>
     <% end %>
     </div>

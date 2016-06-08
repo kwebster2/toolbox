@@ -1,12 +1,14 @@
 class Resource < ActiveRecord::Base
   belongs_to :user
   belongs_to :category
+  
   has_many   :resources_tags
   has_many   :tags, through: :resources_tags
   has_many   :bookmarks
+  has_one    :thumbnail
 
   validates :name, presence: true
-  validates :url, presence: true
+  validates :url, presence: true, uniqueness: true
 
   def add_bookmark(user)
     user_bookmarked?(user) ? unbookmark(user) : bookmark(user)

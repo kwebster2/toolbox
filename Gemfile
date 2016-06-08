@@ -15,11 +15,11 @@ gem 'jquery-ui-rails'
 gem 'figaro'
 gem 'omniauth'
 gem 'omniauth-github'
-#gem 'bcrypt', '~> 3.1.7'
 
-#Boostrap
+# Boostrap & Design
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sass-rails', '~> 5.0'
+gem 'link_thumbnailer'
 
 group :development, :test do
   gem 'pry-rails'

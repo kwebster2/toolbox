@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160607135918) do
+ActiveRecord::Schema.define(version: 20160607234147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,9 +43,10 @@ ActiveRecord::Schema.define(version: 20160607135918) do
     t.string   "description"
     t.string   "url"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "category_id"
+    t.integer  "thumbnail_id"
   end
 
   create_table "resources_tags", force: :cascade do |t|
@@ -65,6 +66,17 @@ ActiveRecord::Schema.define(version: 20160607135918) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "thumbnails", force: :cascade do |t|
+    t.string   "url"
+    t.string   "image_url"
+    t.string   "description"
+    t.string   "title"
+    t.string   "favicon"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "resource_id"
   end
 
   create_table "users", force: :cascade do |t|
