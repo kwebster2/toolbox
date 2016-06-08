@@ -4,6 +4,6 @@ class TagsController < ApplicationController
     # cohort = Cohort.find_by(slug: params[:cohort_slug])
     # cohort_id = cohort.id
       @tags = Tag.search(params[:term])
-      render json: @tags.map(&:name).uniq
+      render json: @tags.pluck(:name).uniq
   end
 end

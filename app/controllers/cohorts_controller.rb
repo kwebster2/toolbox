@@ -6,7 +6,7 @@ class CohortsController < ApplicationController
   end
 
   def show
-    if params[:search]
+    if params[:search] && params[:search] != ""
       tags = params[:search].split(", ").flatten
       @resources = @cohort.resources.includes(:tags).where(:tags => {name: tags})
     else
